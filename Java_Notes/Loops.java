@@ -38,6 +38,25 @@ public class Loops {
             }
         }
 
+        // another way you can loop your code is with a while loop
+        int x = 0;
+        while(x <= 10){
+            System.out.println(x);
+            x++;
+        }
+
+        /*
+         *  For loops are particularly useful when you know how many times you need to do something, or you are working through a data collection
+         *  A while loop is going to be more useful when you can't be sure how many times an operation needs to happen, or your exit condition
+         *  for the loop does not lend itself well to basic mathmatics
+         */
+
+         x = 110;
+         do{
+            System.out.println(x);
+            x++;
+         } while (x <= 10);
+
 
       }
 }
