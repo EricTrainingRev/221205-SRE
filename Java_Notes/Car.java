@@ -46,7 +46,8 @@ public class Car {
         System.out.println(mattDamonCar.gas); // because we made the drive method reduce the gas of the car the gas field is now lower
         System.out.println(georgeClooneyCar.gas);
 
-        Car.checkCount();
+        checkCount();
+
     }
 
     /*
