@@ -17,3 +17,6 @@ The Java Development Kit (JDK) contains the libraries and tools we need to be ab
 A Java Runtime Environment (JRE) is provided with the JDK when you download it. A JRE is what is needed to actually be able to run your Java application. The JRE contains the runtime libraries necessary for your code to execute. Contained within the JRE is the Java Virtual Machine(JVM), which is the tool that actually handles ensuring your code will run on your machine
 
 The JVM is the tool that takes the byte code (.class files) and turns it into data that is understanable by your particular operating system. Keep in mind, all JVMs are found in their respective Java Runtime Environment
+
+## Classes & Objects
+Java is an Object Oriented Programming language: this means that everything is tied to classes and objects. Classes in Java are like blueprints: they contain the information needed for your code to work. Objects in Java are the implementation of the blueprints. It is important to remember that objects do not share the value of their fields with one another: the values are unique to the object when these fields are part of the instance/object scope.
