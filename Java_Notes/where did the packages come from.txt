@@ -1,0 +1,3 @@
+NOTE: the java files have had package statements added to them: this is because I have placed them in sub 
+directories in the Java_Notes folder, and when I moved the files into the sub directories the package statemetns
+were needed to ensure you could still run the files.
