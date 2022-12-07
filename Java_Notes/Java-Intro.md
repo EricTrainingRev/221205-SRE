@@ -20,3 +20,9 @@ The JVM is the tool that takes the byte code (.class files) and turns it into da
 
 ## Classes & Objects
 Java is an Object Oriented Programming language: this means that everything is tied to classes and objects. Classes in Java are like blueprints: they contain the information needed for your code to work. Objects in Java are the implementation of the blueprints. It is important to remember that objects do not share the value of their fields with one another: the values are unique to the object when these fields are part of the instance/object scope.
+
+## Interfaces
+If Classes are blueprints for objects, Interfaces are more like contract agreements for classes. If a class "implements" and interface it is like an agreement has been made that the class will, somehow, implement the features of the interface. Interfaces are also unique in that a class can implement multiple interfaces, whereas only a single class can be extended.
+
+## When to use Abstract vs Interface
+If the only thing that needs to be shared is methods then use an interface: if you also need to share fields (variables associated with the objects) then use an Abstract class
