@@ -1,3 +1,4 @@
+package basics;
 public class Comments { // I can declare my class but also write a comment on the same line
 
     // use two forward slashes to denote everything after them is a comment

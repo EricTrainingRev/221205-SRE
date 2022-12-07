@@ -1,16 +1,9 @@
+package basics;
 public class Methods {
     /*
-     * Methods are reusable code that is attached to a class or interface. They are useful when you need to repreatedly
+     * Methods are reusable code that are attached to a class or interface. They are useful when you need to repreatedly
      * execute some code but don't exactly known when the code will need to be executed. Instead o having to rewrite
      * your code, you just call the method you create
-     */
-
-    /*
-     * public is the access modifier: this method can be referenced anywhere in our code
-     * void is the return type: this method does not return any data
-     * doSomething is the name of the method, so it is how we actually invoke the method
-     * input is the name of the parameter associated with the method: whatever String we provide the method
-     * will be refereced by the variable input inside of the method
      */
 
     public static void main(String[] args) {
@@ -33,6 +26,13 @@ public class Methods {
         }
     }
 
+    /*
+     * public is the access modifier: this method can be referenced anywhere in our code
+     * void is the return type: this method does not return any data
+     * doSomething is the name of the method, so it is how we actually invoke the method
+     * input is the name of the parameter associated with the method: whatever String we provide the method
+     * will be refereced by the variable input inside of the method
+     */
 
     public void doSomething(String input){
         System.out.println("You entered the string: " + input); // we do some string concatenation and print the result to the console

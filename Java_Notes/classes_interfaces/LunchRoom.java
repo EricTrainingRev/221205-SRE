@@ -1,3 +1,4 @@
+package classes_interfaces;
 public class LunchRoom {
     public static void main(String[] args) {
         // both options below are perfectly valid ways of creating Burrito and Croissant objects

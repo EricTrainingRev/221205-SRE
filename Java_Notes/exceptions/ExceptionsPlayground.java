@@ -1,3 +1,4 @@
+package exceptions;
 public class ExceptionsPlayground {
     public static void main(String[] args) {
 

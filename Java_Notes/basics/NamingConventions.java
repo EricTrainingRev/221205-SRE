@@ -1,3 +1,4 @@
+package basics;
 public class NamingConventions {
     /*
      * Java has a couple of standard naming conventions:

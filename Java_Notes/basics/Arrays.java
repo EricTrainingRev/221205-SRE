@@ -1,3 +1,4 @@
+package basics;
 public class Arrays {
     /*
      * Arrays are data structures in Java that we can use to hold other data. Arrays are immutable structures

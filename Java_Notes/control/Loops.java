@@ -1,3 +1,4 @@
+package control;
 public class Loops {
     /*
      * Loops are another way of controlling the flow of your application. These are particularly useful whe you

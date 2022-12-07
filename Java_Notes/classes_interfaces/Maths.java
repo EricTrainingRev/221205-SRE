@@ -1,3 +1,4 @@
+package classes_interfaces;
 public interface Maths {
     /*
      * All interfaces will share some common characteristics

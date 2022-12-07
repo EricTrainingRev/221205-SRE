@@ -1,3 +1,4 @@
+package basics;
 public class StringAPI {
     /*
      * Strings are the simplest object we can use to represent words/phrases within our code. They are
@@ -43,6 +44,7 @@ public class StringAPI {
 
         // Stringbuilder does not have a built in split method, but it is easy to convert your Stringbuilder back into a string
         myWord.toString().split(" "); // this is an easy way to split your stringbuilder
+
 
         /*
          * Use a regular string if you know you will not need to perform many (if any) operations on your word/phrase

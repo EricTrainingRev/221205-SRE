@@ -1,3 +1,4 @@
+package exceptions;
 public class NoBilly extends RuntimeException { // you could extend Exception instead to make a checked exception
     /*
      * There are two ways to create your own exceptions, and this is accomplished by either extending the

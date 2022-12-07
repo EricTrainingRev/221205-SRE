@@ -1,3 +1,4 @@
+package basics;
 public class Operators {
     /*
      *  In Java you have a plethora of operators that can affect the way your code operates

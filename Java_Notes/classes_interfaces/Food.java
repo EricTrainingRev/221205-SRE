@@ -1,3 +1,4 @@
+package classes_interfaces;
 public abstract class Food {
     /*
      * An abstract class can not have objects created: you must instead have a sub-class inherit the properties
