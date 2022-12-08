@@ -24,3 +24,14 @@ You also should be familiar with the following components of an http response:
         - 400 is user error (clientside error)
         - 500 is server error (the developer messed up)
             - 500 is BAD: you do not want 500 status codes being returned to your users
+
+# JSON
+Javascript Object Notation (JSON) is one of the most popular ways of formatting information in http requests (really for any sort of web based communication). At their core, jsons are really just formatted strings
+```json
+{
+    "keyOne":"value one",
+    "keyTwo":2,
+    "keyThree":true
+}
+```
+jsons accept three data types: strings, numbers, and booleans. 
