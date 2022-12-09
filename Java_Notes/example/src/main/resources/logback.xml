@@ -37,7 +37,6 @@
     <!-- root tells logback what your default log settings should be if you don't specify any -->
     <root level="INFO">
         <!-- can set multiple appender references -->
-        <appender-ref ref="ROLLING"/>
         <appender-ref ref="STDOUT"/>
     </root>
 

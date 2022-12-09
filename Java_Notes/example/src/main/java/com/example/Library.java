@@ -3,9 +3,14 @@ package com.example;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.javalin.Javalin;
 
 public class Library {
+
+    public static Logger logger = LoggerFactory.getLogger(Library.class);
 
     /*
      * notice I did not add an access modifier: this means the variable is given the default
@@ -14,6 +19,15 @@ public class Library {
     static List<Book> library = new ArrayList<>();
 
     public static void main(String[] args) {
+        
+        logger.trace("This log was created at the trace level");
+        logger.debug("this log was created at the debug level");
+        logger.info("Application starting!");
+        logger.warn("This log was created at the warn level");
+        logger.error("This log was created at the Error level");
+
+
+
         Book startingBook = new Book();
         startingBook.setTitle("The Fellowship of the Ring");
         startingBook.setAuthor("J. R. R. Tolkien");
