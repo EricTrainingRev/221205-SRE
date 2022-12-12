@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import com.revature.models.User;
 import com.revature.models.UsernamePasswordAuthentication;
 import com.revature.utilities.ConnectionUtil;
@@ -15,7 +13,21 @@ import com.revature.utilities.ConnectionUtil;
 public class UserDao {
     
     public User getUserByUsername(String username){
-        return null;
+        try(Connection connection = ConnectionUtil.createConnection()) {
+            String sql = "select * from users where username = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            User user = new User();
+            user.setId(rs.getInt(1));
+            user.setUsername(rs.getString(2));
+            user.setPassword(rs.getString(3));
+            return user;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return new User();
+        }
     }
 
     public User createUser(UsernamePasswordAuthentication registerRequest){
@@ -69,7 +81,8 @@ public class UserDao {
         UsernamePasswordAuthentication newUser = new UsernamePasswordAuthentication();
         newUser.setUsername("Java"); // make sure the username is unique
         newUser.setPassword("I want Spring");
-        System.out.println(dao.createUser(newUser).getId());
+        // System.out.println(dao.createUser(newUser).getId());
+        System.out.println(dao.getUserByUsername("Java"));
     }
 
 }
