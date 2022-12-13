@@ -13,7 +13,7 @@ create table users(
 create table planets(
 	id serial primary key,
 	name varchar(20),
-	ownerId int references users(id)
+	ownerId int references users(id) on delete cascade -- or on delete set null
 	-- anytime you see "references" you are looking at a "foreign key". All foreign keys
 	-- must point to a primary key on another table
 );
@@ -21,5 +21,5 @@ create table planets(
 create table moons(
 	id serial primary key,
 	name varchar(20),
-	myPlanetId int references planets(id)
+	myPlanetId int references planets(id) on delete cascade -- or on delete set null
 );
