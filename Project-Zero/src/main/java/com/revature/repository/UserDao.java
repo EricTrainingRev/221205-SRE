@@ -76,13 +76,5 @@ public class UserDao {
         }
     }
     // use a main method to test your work
-    public static void main(String[] args) {
-        UserDao dao = new UserDao();
-        UsernamePasswordAuthentication newUser = new UsernamePasswordAuthentication();
-        newUser.setUsername("Java"); // make sure the username is unique
-        newUser.setPassword("I want Spring");
-        // System.out.println(dao.createUser(newUser).getId());
-        System.out.println(dao.getUserByUsername("Java"));
-    }
 
 }

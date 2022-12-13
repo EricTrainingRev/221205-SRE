@@ -13,10 +13,16 @@ public class UserService {
 	}
 
 	public User getUserByUsername(String username) {
-		return null;
+		/*
+		 * All this service method needs to do is return the data grabbed by the dao object.
+		 * That's it: the other parts of the application will handle interpreting what to do with
+		 * the user info returned by this particular method
+		 */
+		return this.dao.getUserByUsername(username);
 	}
 
 	public User register(UsernamePasswordAuthentication registerRequest) {
-		return null;
+		return this.dao.createUser(registerRequest);
 	}
+
 }

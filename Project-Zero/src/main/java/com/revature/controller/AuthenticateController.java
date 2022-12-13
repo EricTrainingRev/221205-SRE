@@ -25,6 +25,11 @@ public class AuthenticateController {
 	}
 
 	public void register(Context ctx) {
+		/*
+		 * There is no code to handle something going wrong, like accidentally trying to create an
+		 * account with a username that is already taken. Be aware of this, don't worry about handling that
+		 * problem
+		 */
 
 		UsernamePasswordAuthentication registerRequest = ctx.bodyAsClass(UsernamePasswordAuthentication.class);
 
