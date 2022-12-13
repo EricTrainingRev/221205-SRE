@@ -1,3 +1,5 @@
+[Official Postgres Documentation](https://www.postgresql.org/docs/)
+[helpful tutorials and examples](https://www.postgresqltutorial.com/)
 # SQL
 Structured Query Language (sql) is a language used to store, retrieve, and edit information in a database. Many databases will have their own implementation of sql, such as postgreSQL. 
 
@@ -78,11 +80,11 @@ delete from people where first_name = 'Robin'; -- deletes all records where firs
 ```
 
 ## DCL
-If multiple people have access to a database you will most likely not want all of them to have root user privileges: you will want to limit what they can/can't do. This is where Data Control Language (DCL) comes into play. You can create roles that have limited capabilities to protect your database from unwanted actions.
+If multiple people have access to a database you will most likely not want all of them to have root user privileges: you will want to limit what they can/can't do. This is where Data Control Language (DCL) comes into play. You can create roles that have limited capabilities to protect your database from unwanted actions, such as new databases or roles being created
 ```SQL
 -- the query below creates a role called test that has a password of "test" as well
 -- the role created below has minimal privileges
-create role test NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT login password 'test'; 
+create role test login password 'test'; 
 
 grant select on people to test; -- allows anyone logged in with the test role to make select queries on the people table
 
