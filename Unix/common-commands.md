@@ -1,0 +1,27 @@
+# Common commands
+- cd
+    - used to change directory
+    - cd ../ changes to the parent directory
+    - cd ./ is a reference to the current directory
+    - cd alone or cd ~ will return you to your user home directory
+- ls
+    - lists the files and directories in the working directory
+    - ls -a will include hidden files/directories (start with a .)
+- pwd
+    - prints the full path to the working directory
+- echo
+    - prints whatever you type to the console 
+        - useful when redirecting text to a file
+            - echo "Hello world" > new-file saves Hello world in a file called new-file
+            - > overwrites the content of the file, >> appends the content
+        - use quotes if your statement includes whitespace
+- cat
+    - concatenates the content of a file to the console
+    - can use the redirect operators to save the output in a different file
+- mkdir
+    - creates a new directory
+- touch
+    - creates a new file
+- grep
+    - takes in a search parameter and returns all lines of a file that include the parameter
+        - grep 500 logs returns all lines of the log file that inlcude 500 in them
