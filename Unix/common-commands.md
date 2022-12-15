@@ -25,3 +25,10 @@
 - grep
     - takes in a search parameter and returns all lines of a file that include the parameter
         - grep 500 logs returns all lines of the log file that inlcude 500 in them
+- cut
+    - takes in a file or text and allows you to cut out specific parts to return
+        - cut -f 3 -d , myText.txt divides each line in the file on every comma and returns the third field (or column) to the console
+- awk
+    - designed to process text based data, a very powerful tool that can be used independently of a script or within one
+        - awk '{ print }' my-file.txt will print the contents of a file, similar to the cat command
+        - var=$(awk "BEGIN {print 87 / 4; exit}") will save the results of 87 / 4 (a floating point value bash normally could not handle) to the var variable
