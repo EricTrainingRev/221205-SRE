@@ -102,3 +102,49 @@ begin; -- this starts a transaction: nothing below is persisted until and end or
     release savepoint bruce_added; -- it is good practice to release savepoints
 end; -- this commits the transaction and persists the changes made
 ```
+
+## Transaction Properties
+Anytime a transaction is started in a Postgres database it should have the ACID properties (Postgres handles ensuring these properties are applied to your transactions, but you can change the database settings to alter these properties):
+
+Atomicity
+- all transactions must succeed for a commit to happen. If any fail, there is no commit
+```sql
+begin;
+    insert into people values ('Ben', 'Hur');
+    insert into peoplee values ('Saint','Nick'); -- the table name is mispelled, causing the query to fail, so no values provided will be saved in the database
+    insert into people values ('Kris','Kringle');
+end;
+```
+Consistency
+- all transactions must enforce existing constraints
+
+Isolation
+- multiple concurent transactions should not interfere with one another
+    - by default, Postgres only allows committed data to be seen by other transactions, so no "Dirty reads" can happen
+        - dirty read: interacting with uncommitted data 
+
+Durability
+- committed transactions should be persisted, even if there is some catastrophic failure (power outage, system, crash, etc).
+
+## Joins
+Join statements allow you to take two tables and view their data together. To know which rows of data to match you must use the "on" keyword to filter the matches
+```sql
+create table teams(
+	team_id serial primary key,
+	team_name varchar(50)
+);
+
+create table players(
+	player_id serial primary key,
+	player_team_id int,
+	player_name varchar(50),
+	constraint team_fk foreign key(player_team_id) references teams(team_id) -- this is another way to create a foreign key constraint
+);
+
+-- a left join will take all the data requested from the left table and join any relevant data from the right table to each record
+-- a right join will take all the data requested from the right table and join any relevant data from the left table to each record
+
+select * from teams left join players on team_id = player_team_id; 
+
+select * from players right join teams on player_team_id = team_id;
+```
