@@ -165,3 +165,117 @@ to reference a variable name you use a $
 ```cli
 echo $variable-name
 ```
+
+when you need to use white space in a variable you can either use single or double quotes: single quotes will bash to read the content literally (including white space and special characters) whereas double quotes will allow injecting variables and commands into the value
+```cli
+name='Ted'
+
+using-single='Hello $name'
+echo using-single # will return Hello $name
+
+using-double="Hello $name"
+echo using-double # will return Hello Ted
+```
+if you want to save the return value of a command (think ls) in a variable you need to wrap the command in parenthesese, but otherwise the setup is the same
+```cli
+content=$(ls)
+```
+
+### (())
+double parenthesis can be used to save the results of simple arithmetic to a variable (spacing between the components of the expression do not affec the outcome). However, in this case you will need to add $ before the douvle parenthesis
+```cli
+sum=$((12+3))
+```
+
+## Control Flow
+### if
+if statements can be used to control the flow of your script's execution. it checks a logical condition, if if the condition is met the code associated with the if statement is executed
+```cli
+# single condition
+if [ {condition to test} ]
+then
+    {commands to execute}
+fi
+
+# if else
+if [ {condition to test} ]
+then
+    {commands to execute}
+else
+    {commands to execute}
+fi
+
+# if elif else
+if [ {condition to test} ]
+then
+    {commands to execute}
+elif [ {condition to test} ]
+then
+    {commands to execute}
+else # optional
+    {commands to execute}
+fi
+```
+anything between "then" and "fi" is executed if the condition of the if statement is met. There are many operators that can be used in the [] (this is actually a reference to the command test) but here are common ones:
+- !{expression}
+    - condition is passed if the expression is false
+- -n {string value}
+    - returns true of the length of the string is greater than 0
+- -z {string value}
+    - returns true if the length of the string is 0
+- {string one} = {string two}
+    - returns true if both strings are equal (same characters)
+    - use != to return true if they do not have the same characters
+- {num one} -eq {num two}
+    - returns true if the two numbers are equal
+- {num one} -gt {num two}
+    - returns true if num one is greater than num two
+- {num one} -lt {num two}
+    - returns true if num one is less than num two
+- -d {file}
+    - file exists and is a directory
+- -e {file}
+    - file exists
+- -r {file}
+    - file exists and has read permission
+- -s {file}
+    - file exists and has a size greater than 0 (not empty)
+- -w {file}
+    - file exists and has write permission
+- -x {file}
+    - file exists and has execute permission
+
+remember to use "=" with string comparisons and -eq for numeric comparisons.
+
+indentation does not have an effect on scripts, but it is good practice to indent your scripts so the structure of the whole is easier to understand. This is a common practice across scripting and programming langauges that can afford to do it.
+
+### boolean operators
+"&&" is the "and" operator, "||" is the "or" operator. These can be used to chain tests together
+```cli
+if [ {first condition to test} ] && [ {second condition to test} ]
+then
+    {commands to execute}
+else
+    {commands to execute}
+fi
+```
+
+### for loops
+for loops iterate through lists: the default delineator for a list is white space and new line, but you can change this by setting the internal field seperator IFS value in your script to something else, like the new line character "\n"
+```cli
+IFS=$"{desired delineator}"
+for {reference to current iteration} in {list}
+do
+    {commands to execute}
+done
+```
+there are a few different ways you can select a list
+- provide list of strings
+    - for name in $names
+- send the contents of a file to the STDOUT and iterate through them
+    - for name in $(echo < names.txt)
+- provide a range to iterate through
+    - for num in {{starting number}..{ending number}..{iteration through range}}
+    - could also just put start and stop: for num in {{start}...{stop}}
+- iterate through content in a directory
+    - for file in {directory}/*
