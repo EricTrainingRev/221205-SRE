@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.boot.entities.Team;
+import com.example.boot.exceptions.EntityNotFound;
 import com.example.boot.repository.TeamDao;
 
 @Service // tells Spring this class handles service layer operations
@@ -20,7 +21,7 @@ public class TeamService {
         if(possibleTeam.isPresent()){ // is present returns true of the object we want was returned in the Optional
             return possibleTeam.get(); // get() returns the object we want if it is present
         } else {
-            return new Team(); // we can return an empty team to indicate there was no data
+            throw new EntityNotFound("Team not found");
         }
     }
 
@@ -29,12 +30,17 @@ public class TeamService {
         if(possibleTeam.isPresent()){
             return possibleTeam.get();
         } else {
-            return new Team();
+            throw new EntityNotFound("Team not found");
         }
     }
 
     public List<Team> getAllTeams(){
-        return this.teamDao.findAll();
+        List<Team> teams = this.teamDao.findAll();
+        if(teams.size() != 0){
+            return teams;
+        } else {
+            throw new EntityNotFound("No teams were found");
+        }
     }
 
     public String createTeam(Team team){
@@ -47,7 +53,7 @@ public class TeamService {
         if (result == 1){
             return "team updated successfully";
         } else {
-            return "something went wrong";
+            throw new EntityNotFound("Team not found");
         }
     }
 
