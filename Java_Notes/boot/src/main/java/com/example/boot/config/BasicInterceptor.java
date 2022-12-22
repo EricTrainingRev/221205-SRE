@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * be sent to its proper handler in the API. 
  * 
  * WARNING: if an ExceptionHandler is triggered, you will not get the postHandle method with this basic
- * interceptor. You will, however, get 
+ * interceptor. You will, however, get your afterCompletion method to execute at the end
  */
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +30,16 @@ public class BasicInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
         System.out.println("BasicInterceptor postHandle executed");
+    }
+
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        System.out.println("BasicInterceptor afterCompletion executed");
     } 
+
+    
 
     
 
