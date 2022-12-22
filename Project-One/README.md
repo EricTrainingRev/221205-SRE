@@ -63,6 +63,7 @@ Micrometer will expose the relevant data in your Spring application, and Prometh
     - Promtail should push your application logs to loki
     - Prometheus should be able to scrape your SLI metrics exposed by Micrometer
     - You should be able to view your metrics over time provided by Prometheus and your logs within Loki by utilizing Grafana
+- Presentation date is 1/5/2023
 
 # Stretch Goal
 Stretch goals are things to work on ONLY when all MVP requirements have been accomplished: listed below are optional features you can add to the project to enhance it further:
