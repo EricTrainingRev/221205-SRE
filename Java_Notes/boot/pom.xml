@@ -30,11 +30,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>7.2</version>
 		</dependency>
+
 <dependency>
     <groupId>org.postgresql</groupId>
     <artifactId>postgresql</artifactId>
