@@ -542,3 +542,37 @@ public class HelloWorld {
     }
 }
 ```
+
+## Mapped Diagnostic Context & Logstash Encoder
+MDC is a tool we can use with Logback to assign key/value pairs to log files. Used with Handler Interceptors in Spring Boot, this provides a powerful way of logging relevant data (method type, url information, etc) to our logs without having to manuall add the information each time we need the details. 
+
+Logstash Encoder is a dependency we can add to our projects that handles converting our log files into JSON formatting. It can make use of MDC to add the key/value pairs we set to our logs with very little configuration needed on our end. Note that these logs can be difficult to read without third party tools, so I don't recommend using the LogstashEncoder while doing development work.
+
+```xml
+<!-- inside pom -->
+<dependency>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>7.2</version>
+</dependency>
+```
+
+```xml
+<!-- inside logback.xml -->
+<!-- note that this encoder could be used with any appender type, but will be most useful with actual log files -->
+<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+    <!-- <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern> -->
+    <includeMdcKeyName>KEY</includeMdcKeyName>
+</encoder>
+```
+
+```java
+//import
+import org.slf4j.MDC;
+
+// to create a key/value pair
+MDC.put("KEY",value);
+
+// to clear all parings
+MDC.clear();
+```
