@@ -12,6 +12,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public String login(HttpSession session){
         session.setAttribute("user", "some username");
+        System.out.println("session set");
         return "logged in successfully";
     }
 
