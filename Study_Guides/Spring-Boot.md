@@ -60,6 +60,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
+// note that no annotation is needed for the class in the repository layer
 public interface PlayerDao extends JpaRepository<Player,Integer>{
 
     Optional<Player> findByPlayerName(String playerName);
@@ -71,6 +73,66 @@ public interface PlayerDao extends JpaRepository<Player,Integer>{
 }
 ```
 ## Spring Web
+Formerly known as Spring MVC, Spring Web allows us to create an API for our application that can handle incoming HTTP requests and returning HTTP responses. Some of the annotations to know:
+- @RestController
+    - tells Spring that the class will be used to handle incoming HTTP requests and outgoing HTTP responses
+- mapping annotations
+    - @GetMapping("/url")
+    - @PostMapping("/url")
+    - @PutMapping("/url")
+    - @DeleteMapping("/url")
+        - indicates the method annotated will handle http requests with the given verb and url
+        - urls can contain path variables, indicated between curly brackets
+- @PathVariable
+    - tells Spring to take assign the value of the path variable to the annotated parameter
+- @RequestBody
+    - tells spring to convert the body of the HTTP request to the Java type provided as a parameter
+- ResponseEntity
+    - a class that provides a convinient means of setting the body and status code of the HTTP response
+        - takes a generic to indicate what type is being returned in the response
+        - HttpStatus is used to indicate what status code to return
+
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PlayerController {
+
+    @Autowired
+    private PlayerService playerService;
+
+     @ExceptionHandler(SomeException.class)
+     public ResponseEntity<String> playerNotfound(SomeException e){
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+     }
+
+    @GetMapping("/player/{pathVariable}")
+    public ResponseEntity<Object> findById(@PathVariable int pathVariable){
+        return new ResponseEntity<>(this.playerService.getPlayerById(pathVariable),HttpStatus.OK);
+    }    
+
+    @PostMapping("/player")
+    public ResponseEntity<String> createPlayer(@RequestBody Player player){
+        return new ResponseEntity<>(this.playerService.createPlayer(player), HttpStatus.CREATED);
+    }
+
+    // delte mappings, put mappings, etc
+}
+
+
+
+```
 
 
     
