@@ -1,17 +1,10 @@
-# FROM tells docker what environment to build our application on top of
-# "slim" images are used when you only want the necessary files/libraries for your app to be able to run
+# It is possible to layer the images you use in order to have more flexibility in how you build/deploy your app
+# By setting an alias for the image we can reference its files/directories in later steps
+FROM maven:3-adoptopenjdk-11 as builder
+COPY ./src src
+COPY ./pom.xml pom.xml
+RUN mvn package
+
 FROM openjdk:11-jdk-slim
-
-
-# COPY tells docker what files/directories to save into the container, and it allows you to rename those files/directories
-# left side is the file/directory you want to copy
-# right side is the file/direcetory copied into your container. You can rename it
-COPY target/boot-0.0.1-SNAPSHOT.jar app.jar
-
-# ENTRYPOINT tells Docker what command to run to startup your application
-# You put the individual parts of the command inside of square brackets like strings, seperating them by commas
+COPY --from=builder target/boot-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
-
-# To build your image you will use the command docker build, and then the location of the dockerfile
-# If the docker file is in your working directory just put a .
-# use the -t flag so we can name our image
