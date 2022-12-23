@@ -83,6 +83,8 @@ Formerly known as Spring MVC, Spring Web allows us to create an API for our appl
     - @DeleteMapping("/url")
         - indicates the method annotated will handle http requests with the given verb and url
         - urls can contain path variables, indicated between curly brackets
+- @ExceptionHandler
+    - tells spring to use the annotated method to handle the HTTP response when an exception is thrown in the controller class
 - @PathVariable
     - tells Spring to take assign the value of the path variable to the annotated parameter
 - @RequestBody
