@@ -14,11 +14,15 @@ docker stop {container name or id} #stops a container
 
 docker rm {container name} #removes the container
 
-docker logs {container name} #shows container logs
+docker logs {container name} #shows container STDOUT logs
 
 docker run -p {host-port}:{container-port} {image-name} # add -d if you want to run in detached mode
 
 docker build -t {name} {Dockerfile path} # tells docker to build an image and to assign it the given name
+
+docker-compose up # tells docker to create and run the services designated in a docker-compose.yml file, can run detached
+
+docker-compose down # tells docker to destroy the services designated in a docker-compose.yml file
 ```
 
 # Docker
