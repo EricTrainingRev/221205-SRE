@@ -132,8 +132,82 @@ public class PlayerController {
     // delte mappings, put mappings, etc
 }
 
+```
+
+## Handler Interceptors
+Sometimes you will need your code to execute before and/or after a controller method: this is where Handler interceptors come into play. 
+- HandlerInterceptor
+    - this interface provides access to the various HTTP objects we need for interacting with requests and responses
+- @Component
+    - this tells Spring it needs to manage the class
+- preHandle
+    - this method is executed before the method mapped to the request is executed. If it returns false then the mapped method is not executed
+- postHandle
+    - this method is executed after the method mapped to the request is finished. Will not trigger if an exception is thrown during the mapped method execution
+- afterCompletion
+    - this method is exectued after the method mapped to the request is handled, including if an exceptin is raised.
+- WebMVCConfigurer
+    - an interface that provides the means of "registering" handler interceptors
+- @Configuration
+    - tells Spring this class changes the default configurations of the application
+- addInterceptors
+    - a method that is used to tell Spring what interceptors to register
+- InterceptorRegistry
+    - the class that keeps track of interceptors, its paramter is referenced in the addInterceptors method
+        - addInterceptor
+            - registers the interceptor provided as an argument to the interceptor registry
+        - addPathPatterns
+            - tells Spring what url patterns should be intercepted by the handler interceptor
+        - order
+            - tells Spring what priority the interceptor should have. The lower the priority number the higher priority the interceptor has
+                - if you have two interceptors, one priority 0, the other priority 1, the interceptor with priority 0 will have its preHandle execute first
+
+```java
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+@Component // this tells Spring to manage the class
+public class BasicInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+       System.out.println("BasicInterceptor preHandle executed");
+       return true;
+    }
 
 
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+            ModelAndView modelAndView) throws Exception {
+        System.out.println("BasicInterceptor postHandle executed");
+    }
+
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        System.out.println("BasicInterceptor afterCompletion executed");
+    } 
+```
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebMVCConfig implements WebMvcConfigurer { // Spring Web is the new name for Spring MVC
+    
+    @Autowired
+    private BasicInterceptor basicInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
+        registry.addInterceptor(basicInterceptor).addPathPatterns("/**").order(Ordered.LOWEST_PRECEDENCE);
+        
+    }
 ```
 
 
