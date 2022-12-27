@@ -10,14 +10,15 @@ services:
   # the name of this serivce(container) is called "app".
   app:
     # the image tells docker what image we are building
-    image: sports
+    # if you reference an image that is not saved locally docker will pull the image for you
+    image: esuminski/sports:stdout
     # the build section provides docker with the details needed to build the specified image
-    build:
+    # build:
       # context tells docker where to copy any necessary files from: . indicates current directory
-      context: .
-      dockerfile: dockerfile
+      # context: .
+      # dockerfile: dockerfile
     # container_name sets the name of the container. simulates adding the --name flag to docker run
-    container_name: app
+    container_name: sports
     # ports maps the host port (left side) to the container port (right side)
     ports:
       - 8080:8080
