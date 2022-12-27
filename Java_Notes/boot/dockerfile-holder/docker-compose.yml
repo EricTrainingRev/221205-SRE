@@ -1,0 +1,43 @@
+# A Docker Compose must always start with the version tag.
+version: '3'
+
+# Docker Compose works with services.
+# 1 service = 1 container.
+# For example, a server, a client, a database...
+# We use the keyword 'services' to start to create services.
+services:
+
+  # the name of this serivce(container) is called "app".
+  app:
+    # the image tells docker what image we are building
+    # if you reference an image that is not saved locally docker will pull the image for you
+    image: esuminski/sports:file
+    # the build section provides docker with the details needed to build the specified image
+    # build:
+      # context tells docker where to copy any necessary files from: . indicates current directory
+      # context: .
+      # dockerfile: dockerfile
+    # container_name sets the name of the container. simulates adding the --name flag to docker run
+    container_name: sports
+    # ports maps the host port (left side) to the container port (right side)
+    ports:
+      - 8080:8080
+      - 5432:5432
+    # depends_on is useful if you need another container to be created first
+    # depends_on:
+    #   - dependency
+    # you can set environment variables in the container
+    environment:
+      - VARIABLE=VALUE
+    # you can map files in a container directory (right side) to a directory outside the container (left side)
+    volumes:
+      - ./logs/:/logs/
+
+
+  # this is the second container for our deployment
+  # dependency:
+
+  #   image: 'anotherImage'
+  #   container_name: requiredContent
+  #   ports:
+  #     - 1234:1234
