@@ -2,5 +2,5 @@
 # I will use this script instead of manually entering in commands
 # so I don't accidentally make a spelling mistake
 
-docker build -t esuminski/sports:stdout .
-docker push esuminski/sports:stdout
+docker build -t esuminski/sports:file .
+docker push esuminski/sports:file
