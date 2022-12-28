@@ -20,6 +20,6 @@
 
     <root level="INFO">
         <!-- can set multiple appender references -->
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
