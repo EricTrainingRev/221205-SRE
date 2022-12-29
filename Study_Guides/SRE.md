@@ -218,3 +218,14 @@ Grafana is a visualization tool that integrates well with Loki (they were made b
     - this tool lets you create or review alerts tied to integrated data sources (like Prometheus)
 - Configurations/Data Sources
     - this is where you can configure Grafana to connect with your various data sources
+
+```yml
+version: '3'
+
+services:
+  grafana:
+    image: grafana/grafana:latest # default username/password:admin/admin
+    container_name: logging-grafana
+    ports:
+      - 3000:3000
+```
