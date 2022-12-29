@@ -44,5 +44,6 @@ services:
       - 9090:9090
     volumes:
       - ./configs/prometheus-config.yml:/etc/prometheus/prometheus-config.yml
+      - ./configs/prometheus-rules.yml:/etc/prometheus/prometheus-rules.yml
     container_name: logging-prometheus
     command: "--config.file=/etc/prometheus/prometheus-config.yml" # we need to tell Prometheus what to target

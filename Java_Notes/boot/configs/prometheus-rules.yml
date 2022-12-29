@@ -1,0 +1,47 @@
+groups:
+- name: example
+  rules:
+
+  - alert: AppDown
+    expr: up == 0
+    for: 5m
+    labels:
+      severity: warn
+    annotations:
+      summary: "App is down"
+      description: "Prometheus has detected the application is not running for over 5 minutes"
+
+  - alert: APIHighLatency:5min
+    expr: sum(rate(http_server_requests_seconds_sum{job="sports"}[5m])) / sum(rate(http_server_requests_seconds_count{job="sports"}[5m])) > 0.2
+    labels:
+      severity: warn
+    annotations:
+      summary: "5min latency too high"
+      description: "Sports application is taking too long to handle requests in a 5 minute range"
+
+  - alert: APIHighLatency:15min
+    expr: sum(rate(http_server_requests_seconds_sum{job="sports"}[15m])) / sum(rate(http_server_requests_seconds_count{job="sports"}[15m])) > 0.2
+    labels:
+      severity: warn
+    annotations:
+      summary: "15min latency too high"
+      description: "Sports application is taking too long to handle requests in a 15 minute range"
+
+  - alert: APIHighLatency:30min
+    expr: sum(rate(http_server_requests_seconds_sum{job="sports"}[30m])) / sum(rate(http_server_requests_seconds_count{job="sports"}[30m])) > 0.2
+    labels:
+      severity: warn
+    annotations:
+      summary: "30min latency too high"
+      description: "Sports application is taking too long to handle requests in a 30 minute range"
+
+  - alert: APIHighLatency:1hour
+    expr: sum(rate(http_server_requests_seconds_sum{job="sports"}[1h])) / sum(rate(http_server_requests_seconds_count{job="sports"}[1h])) > 0.2
+    labels:
+      severity: warn
+    annotations:
+      summary: "1hour latency too high"
+      description: "Sports application is taking too long to handle requests in an hour range"
+
+  
+
