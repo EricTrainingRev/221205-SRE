@@ -207,7 +207,7 @@ services:
     command: "--config.file=/etc/prometheus/prometheus-config.yml" # we need to tell Prometheus what file has its configurations
 ```
 ## [Grafana](https://grafana.com/grafana/)
-Grafana is a visualization tool that integrates well with Loki (they were made by the same company) and Prometheus. Grafana primarily works by creating "dashboards" of information that allow you to visulize whatever data you are looking at. It also has querying tools that allow you to find specific logs stored in your Loki instance, and it even includes powerful query building tools that let you procedurally craft queries to send to your Loki instance in order to find the correct log files you are looking for. It also integrates well with Prometheus: the dashboard capabilities in particular allow you to create custom graphs and views that let you see the most pertienent information you need displayed in graph or table formatting without having to manually send the queries every time you want the data. Grafana also allows you to view Prometheus alerts and to display them in a daashboard alongside your metrics, giving you the most relevant data you need to know at a moments glance. There are a few Grafana sectors to be aware of:
+Grafana is a visualization tool that integrates well with Loki (they were made by the same company) and Prometheus. Grafana primarily works by creating "dashboards" of information that allow you to visulize whatever data you are looking at. It also has querying tools that allow you to find specific logs stored in your Loki instance, and it even includes powerful query building tools that let you procedurally craft queries to send to your Loki instance in order to find the correct log files you are looking for. It also integrates well with Prometheus: the dashboard capabilities in particular allow you to create custom graphs and views that let you see the most pertienent information you need displayed in graph or table formatting without having to manually send the queries every time you want the data. Grafana also allows you to view Prometheus alerts and to display them in a dashboard alongside your metrics, giving you the most relevant data you need to know at a moments glance. There are a few Grafana sectors to be aware of:
 - Dashboards
     - this is where you can create or view your own custom dashboards to display relevant metrics and alerts
     - there are many publically available templates you can work off of as well
@@ -220,6 +220,7 @@ Grafana is a visualization tool that integrates well with Loki (they were made b
     - this is where you can configure Grafana to connect with your various data sources
 
 ```yml
+# Basic docker compose configuration
 version: '3'
 
 services:
@@ -229,3 +230,72 @@ services:
     ports:
       - 3000:3000
 ```
+
+# Incident Management
+At some point in your SRE career SOMETHING is going to go wrong: a deployment is going to fail, a service is going to stop responding to requests, a data center is going to lose power, etc. Your observation tools can inform you of the issue, or users can report an issue, or another SRE might notice the problem, there are many ways that issues can be reported. When these situations arise you have an "Incident" on your hands.
+
+An Incident is some urgent problem that is (typically) out of the ordinary, and almost always requires multiple individuals to work on it to resolve the issue/s at hand. The ways in which incidents can occure are near infinite, so addressing each and every possibility is impossible. You can, however, have a discrete set of guiding principles that determine how you approach incidents when they arise. There are four principles suggested by Google that can help guide a team working to solve an incident:
+1. Maintain a clear line of command
+2. Designate clearly defined roles
+3. Keep records of your work (debugging and mitigation actions)
+4. Declare incidents sooner rather than later
+
+Adding on to this, Google, in developing its SRE practices, draws inspiration from the Incident Command System designed by firefighters in 1968. In their system, there are three "C"s that help maintain focus and efficiency which Google uses to suppliment their Incident Mangement guiding principles:
+- Coordinate
+- Communicate
+- Control
+
+As stated in the Google SRE handbook: "When something goes wrong with incident response, the culprit is likely in one of these areas. Mastering the 3Cs is essential for effective incident response."
+
+### Incident Management: Leadership Roles
+Drawing from Google's practices again, they have three leadership positions during an incident to maintain coordination, communication, and control:
+- Incident Commander
+  - this individual handles communication between the different teams involved in an incident response, allowing those teams to focus on their work
+  - the Incident Commander is also a delegator: as the incident develops and new work needs to be done it is the commander who should delegate the new work to new or current teams that are working on the incident
+  - typically, the SRE who declares the incident starts as the Incident Commander, and then can hand off the role to someone else if necessary
+  - The Incident Commander also handles the other leadership roles until the positions are assigned
+- Communications Lead
+  - this individual handles communications between the Incident Management team and those "outside" of the team
+    - stakeholders
+    - upper management
+    - hr
+    - etc
+  - if the incident requires it, the Communications Lead also handles answering any inquiries about the incident from outside entities
+- Ops Lead
+  - this individual is in charge of the individuals/teams who are working to mitigate the incident
+    - can redirect traffic from a corrupt VM to others
+    - can rollback a deployment
+    - can increase computing power in a VM
+    - etc
+
+### Incident Management: Postmortem
+Eventually an Incident will be handled, the problem solved, and operations will return to normal. This is the time when a Postmortem document should be created by those involved with the incident. A Postmortem is an extensive report on the incident that should contain the following data (and more if necessary)
+- When did the incident happen?
+- Who was involved in solving the incident?
+- What was the incident?
+- What damage was done by the incident?
+- What solved the incident?
+- What actions were taken to mitigate the incident?
+- When did things return to normal?
+  - did things return to normal?
+
+### Postmortem: When to write one?
+Not every incident is going to require a Postmortem write-up: declared incidents that turn out to be small, easily solved issues don't require the extensive work. Postmortems are more useful when events like the following occur (again, not an exhaustive list):
+- Data was lost
+- User information was exposed
+- Manual intervention was necessary
+- The incident took an inordinate amount of time to solve and fix
+- Monitoring tools failed to indicate the incident was in progress
+- More than one team was needed to solve the incident
+
+### Postmortem: Blameless Culture
+Postmortems should be as exhaustive as is reasonable: the goal of these documents is to provide a learning experience and intructions for future teams that must deal with similar (or the same) incident. Consequently, this report requires all involved to be honest and open about their work, which can be daunting if you are an individual who helped create the problem in the first place. To combat the inclination to withhold information a "Blameless" culture should be developed surrounding Postmortem documentation. A "Blameless" Postmortem doesn't ignore the events and actions that led to the incident (or exaserbated it), but it does divorce the events/actions from the individuals who participated in them. The ultimate goal of the Postmortem is for those involved and studying the incident to learn and grow so that they can imporve in their work and the company can better handle future incidents. Blaming individuals in Postmortems is directly contradictory to the goal of continual improvement, and will ultimately encourage people to withhold information that might paint them in a bad light. When building Postmortem reports:
+- focus on events, not individuals
+- observations about individual or team actions should be constructive in nature, not degrading
+  - if a team or individual messed up it should be noted, but comments about the messup should fundamentally be constructive and educational in nature: Postmortems are not for shamming people or teams
+- anyone who reads the Postmortem should walk away with a new understanding of the system involved, what went wrong, and how to handle the same issue in the future
+
+In order for a Postmortem to be most effective it must be a collaborative effort: a typical incident will involve multiple teams and individuals, and none of them will have the full picture of the incident. Therefore, the teams/individuals involved need to work together in order to create a complete report on the incident. For instance, the SRE team may have been focused on monitoring application metrics during the incident in order to make sure that other systems didn't fail during the event. While they were monitoring, the dev team was working to fix an issue with the newly created docker image that led to a vm crashing. The SRE team doesn't know what work the Dev team did, and the Dev team doesn't know how their work affected the overall performance and metrics of other systems. Together, they are able to create a complete picture of what happened and record it in the Postmortem.
+
+Lastly, it is good practice to have senior memebers of the teams involved with the incident review the Postmortem to confirm that the details it provides are relevant. A Postmortem that just says a problem occurs and was solved is not useful for preventing/managing such incidents in the future. A Postmortem that delves into the issue, debugging strategies that worked and didn't work, and how the issue was solved provides lasting value for all teams invovled, and even those that weren't, since they can still benefit from the experience the incident management team gained from the incident.
+
