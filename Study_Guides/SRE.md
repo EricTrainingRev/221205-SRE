@@ -120,7 +120,7 @@ Prometheus is an open sourced monitoring tool that supports alerting and custom 
 - Gauges
     - gauges measure values that fluctuate by nature: you can't go from 5 http requests made to your application to 4, but you can go from 3 users logged in to 0, then back up to 2, then down to 1, etc.
 - Histograms
-    - histograms are "configurable buckets" the hold multiple values. These types of metrics typically end with _sum or _count because they container the sum of all measurements or the total number of measurements made over time respectively
+    - histograms are "configurable buckets" that hold multiple values. These types of metrics typically end with _sum or _count because they contain the sum of all measurements or the total number of measurements made over time respectively
 
 All this information is acquired by Prometheus scraping an application: this is a process of pulling data from a source (typically via an http request) and then storing the data in the time series database.
 ### Counters and Rate
