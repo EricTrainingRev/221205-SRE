@@ -10,4 +10,4 @@ spec: # technial specifications of the service
     - protocol: TCP
       port: 80 # port of the load balancer 80 is the standard http port 
       targetPort: 3000 # what port on the pod does this service listen to
-  # load balancers will automatically be assigned a NodePort to listen to
+  # load balancers will automatically be assigned a node port to listen to

@@ -1,7 +1,7 @@
 apiVersion: v1 # version of kubernetes you are writing
 kind: Pod # type of kubernetes object you are creating
 metadata: # information about the pod for kubernetes
-  name: pod-name
+  name: pod-name # this is needed for referencing the pod
   labels: # the labels are just for marking up and selecting pods
     app: app-name
     # can do more: they are really just key value pairs you can create
