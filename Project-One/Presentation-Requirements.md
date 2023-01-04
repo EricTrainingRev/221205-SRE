@@ -3,6 +3,7 @@
 - screen shared
 - mic working
 - business casual
+- aim for 3.5-4 minutes with your presentation
 
 # Order of Operation
 1. share P1 github repo link
