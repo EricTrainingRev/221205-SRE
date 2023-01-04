@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: greeter-pod
   labels:
-    pod: greeter-pod
+    pod: greeterr-pod
 
 spec:
   containers:
