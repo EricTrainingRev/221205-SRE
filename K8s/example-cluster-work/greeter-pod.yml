@@ -4,6 +4,7 @@ metadata:
   name: greeter-pod
   labels:
     pod: greeter-pod
+    extra: another-value
 
 spec:
   containers:
