@@ -1,13 +1,13 @@
 apiVersion: v1 
 kind: Pod
 metadata:
-  name: planetarium-pod
+  name: greeter-pod
   labels:
-    pod: planetarium-pod
+    pod: greeter-pod
 
 spec:
   containers:
-    - name: planetarium-container
-      image: esuminski/sports:rds
+    - name: greeter-container
+      image: esuminski/english:broken
       ports:
       - containerPort: 8080
