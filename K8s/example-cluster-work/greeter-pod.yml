@@ -9,6 +9,6 @@ metadata:
 spec:
   containers:
     - name: greeter-container
-      image: esuminski/english:fixed
+      image: esuminski/english:broken
       ports:
       - containerPort: 8080
