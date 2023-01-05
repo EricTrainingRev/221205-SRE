@@ -5,7 +5,7 @@ metadata:
   namespace: "default"
   labels:
     deployment: "greeter-deployment"
-spec:
+spec: # this is where we create the replicaset specs
   replicas: 3
   # # minReadySeconds: 5
   # strategy:
@@ -16,8 +16,8 @@ spec:
   selector:
     matchLabels:
       pod: "greeter-pod"
-  template:
-    metadata:
+  template: # this is where the pod information starts
+    metadata: # I am not setting a name for the pods because the deployment will handle that for me
       labels:
         pod: "greeter-pod"
     spec:
