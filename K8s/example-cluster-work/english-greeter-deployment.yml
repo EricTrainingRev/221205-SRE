@@ -1,10 +1,10 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "greeter-deployment"
+  name: "english-greeter-deployment"
   namespace: "default"
   labels:
-    deployment: "greeter-deployment"
+    app: "english-greeter"
 spec: # this is where we create the replicaset specs
   replicas: 3
   # # minReadySeconds: 5
@@ -15,15 +15,15 @@ spec: # this is where we create the replicaset specs
   #     maxUnavailable: 0
   selector:
     matchLabels:
-      pod: "greeter-pod"
+      app: "english-greeter"
   template: # this is where the pod information starts
     metadata: # I am not setting a name for the pods because the deployment will handle that for me
       labels:
-        pod: "greeter-pod"
+        app: "english-greeter"
     spec:
       # terminationGracePeriodSeconds: 30
       containers:
-      - name: "greeter-app"
+      - name: "english-greeter-app"
         image: "esuminski/english:fixed"
         imagePullPolicy: "Always"
         ports:
