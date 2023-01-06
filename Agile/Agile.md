@@ -73,3 +73,27 @@ Scrum is a methodology that uses the Agile mindset to guide the work process and
     - These are the individuals who compose the various teams in the scrum
 
 ## Scrum Terms
+- Three Main Phases
+    - Initial Phase
+        - initial starting goals are set and the starting Project backlog is created
+        - Backlog is a collection of epics/user stories that need to be completed
+    - Sprint Cycles
+        - this is when the sprints happen: depending on how requirements change this phase can be lengthened or shortened according to business needs
+    - Closure Phase
+        - this is where project work is finished, any closing documentation is written up, and the team can be assigned to a new project
+- Key Terms
+    - Backlog
+        - Project Backlog
+            - complete collection of epics/user stories that need to be finished
+        - Sprint Backlog
+            - collection of user stories that need to be completed during the current Sprint
+    - Ceremonies (activities)
+        - User Story Grooming Ceremony
+            - this is the activity at the start of a sprint where user stories and/or epics (depending on the story points involved) are assigned to individuals or groups
+        - Daily Standup (The Scrum)
+            - daily team check-in during a sprint where teams are able to collaborate and realign with each other
+                - update
+                - what am I going to do today
+                - blockers
+        - Sprint Retrospective
+            - happens at the end of every sprint, it is a time for the team to come together to review how the sprint went and to strategize on how the team will imporve upon the next sprint
