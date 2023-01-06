@@ -7,7 +7,6 @@ metadata:
     app: "english-greeter"
 spec: # this is where we create the replicaset specs
   replicas: 3
-  revisionHistoryLimit: 5
   # # minReadySeconds: 5
   # strategy:
   #   type: RollingUpdate
