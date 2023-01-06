@@ -1,0 +1,13 @@
+deployment 1: good image
+- apply command used
+deployment 2: bad image
+- undo command used
+deployment 3: good image (new undo points towards deployment 2)
+...
+...
+...
+deployment 53
+deployment 54
+deployment 55: broken again
+- undo
+deployment 56: same settings as deployment 54
