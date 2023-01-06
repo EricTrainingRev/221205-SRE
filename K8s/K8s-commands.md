@@ -42,3 +42,17 @@ the delete command will tell Kubernetes to stop managing the object you indicate
 ```cli
 kubectl delete {object type} {object name}
 ```
+
+## rollout
+the rollout command provides options for updating resources in the cluster
+```cli
+kubectl rollout history deployment {deployment name} # provides details on revisions to the deployment
+
+kubectl rollout undo deployment {deployment name} # reverts a deployment to the previous revision
+```
+
+## scale
+the scale command lets you change the number of replicas in a deployment
+```cli
+kubectl scale --replicas={new number} {object type} {object name} 
+``` 
