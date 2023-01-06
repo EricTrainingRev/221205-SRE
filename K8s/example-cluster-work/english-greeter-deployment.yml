@@ -25,7 +25,7 @@ spec: # this is where we create the replicaset specs
       # terminationGracePeriodSeconds: 30
       containers:
       - name: "english-greeter-app"
-        image: "esuminski/english:fixed"
+        image: "esuminski/english:broken"
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
