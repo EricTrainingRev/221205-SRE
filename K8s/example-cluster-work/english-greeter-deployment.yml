@@ -22,3 +22,11 @@ spec: # this is where we create the replicaset specs
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
+
+        volumeMounts: # this tells Kubernetes what directory/files to add to a volume
+          - mountPath: /logs
+            name: logs # this is the volume we want the logs mounted to
+
+
+      volumes:
+        - name: logs # this is the volume that will have data from the pod stored in
