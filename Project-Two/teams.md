@@ -1,21 +1,21 @@
 # Scrum Teams
 
-# Team 1
+# Team Rocket
 - Trevor Johnson
 - Jiawen Chen
 - Colton Morris
 
-# Team 2
+# Team Sol
 - Sabrina Smith
 - Tristan Lozano
 - Alexander Hunt
 
-# Team 3
+# Team No name
 - Luis Martinez 
 - Michael Newberg
 - Hongbin Liu
 
-# Team 4
+# Team Kuber-Knights
 - Allan Lee
 - Ryan Loscalzo
 - Gregory Yezhov
