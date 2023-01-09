@@ -12,7 +12,7 @@ groups:
       description: "Prometheus has detected the application is not running for over 5 minutes"
 
   - alert: APIHighLatency:5min
-    expr: sum(rate(http_server_requests_seconds_sum{job="sports"}[5m])) / sum(rate(http_server_requests_seconds_count{job="sports"}[5m])) > 0.2
+    expr: example_recording_rule > 0.2
     labels:
       severity: warn
     annotations:
@@ -42,6 +42,6 @@ groups:
     annotations:
       summary: "1hour latency too high"
       description: "Sports application is taking too long to handle requests in an hour range"
-
-  
-
+      
+  - record: example_recording_rule
+    expr: sum(rate(http_server_requests_seconds_sum{job="sports"}[5m])) / sum(rate(http_server_requests_seconds_count{job="sports"}[5m]))
