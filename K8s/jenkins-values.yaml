@@ -1,0 +1,32 @@
+controller:
+  installPlugins: # in an ideal situation you would specify the version of the plugin you use
+  - kubernetes
+  - workflow-aggregator
+  - git
+  - configuration-as-code
+  - docker-workflow
+  - github-branch-source
+  - docker-plugin
+  - pipeline-stage-view
+  - timestamper
+  - github
+
+  jenkinsUriPrefix: "/jenkins"
+  ingress: # this tells Kubernetes to create an ingress object that gives us access to jenkins
+    enabled: true
+    # Override for the default paths that map requests to the backend
+    paths: []
+    apiVersion: networking.k8s.io/v1
+    ingressClassName: nginx
+    path: "/jenkins"
+
+agent:
+  podTemplate:
+    greeting: |
+        - name: greeting
+          label: jenkins-greeting
+          serviceAccount: jenkins
+          containers:
+          - name: docker
+            image: docker:18-dind
+            privileged: true
