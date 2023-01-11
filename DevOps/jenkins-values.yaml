@@ -1,0 +1,33 @@
+controller:
+  installPlugins:
+  - kubernetes
+  - workflow-aggregator
+  - git
+  - configuration-as-code
+  - docker-workflow
+  - workflow-aggregator
+  - github-branch-source
+  - docker-plugin
+  - pipeline-stage-view
+  - timestamper
+  - github
+  JCasC:
+    defaultConfig: true
+  # to get generated password: kubectl get secret [--namespace [namespace]] [release] -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode ; echo
+  jenkinsUriPrefix: "/jenkins"
+  ingress:
+    enabled: true
+    paths: []
+    apiVersion: networking.k8s.io/v1
+    ingressClassName: nginx
+    path: "/jenkins"
+agent:
+  podTemplates:
+    devops: |
+        - name: devops
+          label: jenkins-devops
+          serviceAccount: jenkins
+          containers:
+          - name: docker
+            image: docker:18-dind
+            privileged: true
