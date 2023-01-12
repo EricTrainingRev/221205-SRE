@@ -11,4 +11,4 @@ This is where Terraform specific information will be placed, typically you will 
 This is where you put the configurations necessary for interacting with the cloud provider: typically this will include some sensitive information for giving terraform permission to interact with the cloud provider
 
 ### Resource Blocks
-Resource blocks are used to define individual components of a deployment: these can be things like VPCs, servicers, 3rd party resources, etc.
+Resource blocks are used to define individual components of a deployment: these can be things like VPCs, servers, 3rd party resources, etc.
