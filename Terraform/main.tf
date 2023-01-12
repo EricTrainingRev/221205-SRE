@@ -8,7 +8,7 @@ provider "aws" {
   # both keys should be provided by an IAM role created in aws
 }
 
-module "ec2-instance" {
+module "ec2-instance" { # you can see more of this module's info in the .terraform/modules directory
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 3.0"
 
