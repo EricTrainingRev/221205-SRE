@@ -8,4 +8,4 @@ variable "secret_key" {}
 
 # tfvars files should look something like this:
 # access_key = "tbd"
-# secret_key = "tbd"access_key = "tbd"
+# secret_key = "tbd"
