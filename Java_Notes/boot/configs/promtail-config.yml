@@ -10,7 +10,7 @@ clients:
 
 scrape_configs: # this section tells promtail where to find the log files
   - job_name: system
-    static_configs: # we choose static_configs because our local logs are "static"
+    static_configs:
       - targets:
           - localhost
         labels:
