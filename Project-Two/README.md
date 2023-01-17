@@ -24,7 +24,9 @@ In this sprint you will add on the infrastructure to deploy your Planetarium app
     - Prometheus should be deployed in the cluster for metric tracking over time
     - Grafana should be deployed in the cluster to allow viewing/interacting with logs and metrics
     - Jenkins should be deployed in the cluster to manage your DevOps pipeline
-
+- Terraform Requirements
+    - Terraform should be used to manage a new Postgres RDS instance for your Planetarium application
+        - make sure that it is free tier eligible when you create it
 - Github Requirements
     - all team members should contribute to the github repository
     - git polling should be set up to allow for Jenkins to automate the DevOps pipeline you set up
