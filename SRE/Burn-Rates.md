@@ -50,3 +50,69 @@ There are definite pros and cons to alerting off this simple system
 - cons
     - there is potential for a significant number of alerts triggering for non-significant events
     - very low precision: you will get alerts off EVERY time your SLI indicates you are not meeting your SLO, so every non-significant event is going to trigger an alert
+
+## Alerting When SLI >= SLO Over a Longer Range
+By tracking your metrics over longer periods of time (5m, 30m, 1h, 1d, etc) you can reduce the negative effects of the simple SLI >= SLO alerting rules, but this creates some drawbacks of its own
+- pros
+    - this methodology still has good detection time, but it is a little slower than the previous method
+    - you will have high precision with this system as well
+- cons
+    - this methodology can lead to poor reset times for your alerts
+    - longer rate measurements can be more resource costly
+
+## Adding Pending Period to Alerts
+You can add a pending period to your alerts to help facilitate whether a significant event is happening or not
+- pros
+    - having a pending period can help to further increase your precision
+- cons
+    - poor potential recall
+        - an issue could be short in nature but repetitive, causing your alert to constantly pend but never actually fire, thus you miss what is actually a significant event
+    - poor detection time
+        - see above issue
+
+## Introducing Burn Rate
+Burn Rate is a value that represents how quickly you are using up your error budget. Take for example the following SLO over a 30 day period: 99.9% of HTTP requests should be handled successfully. For a 99.9% success rate, a 0.1% failure rate would constitute a burn rate of 1. What does this value actually do for us? Well, a burn rate of 1 indicates that, after a 30 day time period of 0.1% failure rate, your Error Budget would be 100% used up. 
+
+However, let's say the failure rate is 0.2%: this would constitute a burn rate of 2 instead of one. This means that your service that has a 0.2% failure rate will eat through your entire error budget in 15 days time. Here is a table showing how this could play out with more numbers
+|Burn rate| Error Rate for HTTP handling| Time for Error Budget to be used up|
+|---------|-----------------------------|------------------------------------|
+| 1 | 0.1% | 30 days |
+| 2 | 0.2% | 15 days |
+| 10 | 1% | 3 days |
+|1000| 100%| 43 minutes|
+
+Working with a burn rate, we can now change the way we are alerting with our services: the alert rule we could create would look something like this:
+```
+sum(rate(http_count{job="sports", status=~"5.."}[5m])) 
+/ 
+sum(rate(http_count{job="sports"}[5m]))
+>=
+burn-rate * 0.001
+``` 
+This formula would create an alert that triggers anytime the failure rate of the service being measured is at or greater than the burn rate multiplied by 0.001 (which will allow us to check the percentage of sfailure against the burn rate). This new system has some pros and cons to it
+- pros
+    - good precision
+    - good detection time
+- cons
+    - low recall
+    - can have poor reset times for longer ranges
+
+## Multiple Burn Rate alerting
+We can make the Burn Rate alerting system more robust by creating multiple alerts based off of longer and longer time rates being measured. So for instance we could alert off the following options:
+|Error Budget consumption| Time Window | Burn Rate | Notification option |
+|------------------------|-------------|-----------|---------------------|
+| 5%                     |   6 hour    |    6      |      page           |
+| 10%                    |  3 days     |   1       |        ticket       |
+
+By manipulating the time frame you are working with, the budget being used up, and the actual burn rate value, you can determine what kind of notification should happen based up the error budget being consumed.
+- pros
+    - highly adaptable
+    - high precision
+    - high recall
+- pros
+    - this system can be difficult to mange/understand
+        - difficult to update if your change your SLO tracking timeframe (30 days to 25 days)
+        - easy to create overlapping alerts that will trigger for the same significant event, but could also trigger for different significant events, and you won't know which is the case until you dig deeper
+    - this system typically has long reset times
+
+## Multi window/Burn Rate Alerting Method
