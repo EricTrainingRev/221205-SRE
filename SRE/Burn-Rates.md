@@ -89,7 +89,7 @@ sum(rate(http_count{job="sports"}[5m]))
 >=
 burn-rate * 0.001
 ``` 
-This formula would create an alert that triggers anytime the failure rate of the service being measured is at or greater than the burn rate multiplied by 0.001 (which will allow us to check the percentage of sfailure against the burn rate). This new system has some pros and cons to it
+This formula would create an alert that triggers anytime the failure rate of the service being measured is at or greater than the burn rate multiplied by 0.001 (which will allow us to check the percentage of failure  against the burn rate). This new system has some pros and cons to it
 - pros
     - good precision
     - good detection time
@@ -116,3 +116,39 @@ By manipulating the time frame you are working with, the budget being used up, a
     - this system typically has long reset times
 
 ## Multi window/Burn Rate Alerting Method
+This strategy combines all the previous strategies we have looked at, takes the best parts of each of them, and uses them to try and provide the highest precision and recall percentages while keeping detection time and alert reset times down. In this methodology a short and long range are used with the same data to determine whether an alert should trigger or not:
+```
+sum(rate(http_server_requests_seconds_count{job="sports", status=~"5.."}[5m])) 
+/ 
+sum(rate(http_server_requests_seconds_count{job="sports"}[5m]))
+>
+14.4 * 0.001
+and
+sum(rate(http_server_requests_seconds_count{job="sports", status=~"5.."}[1h])) 
+/ 
+sum(rate(http_server_requests_seconds_count{job="sports"}[1h]))
+>
+14.4 * 0.001
+```
+Google recommends that your short range be 1/12th of the long range you use to create your alert. Google actually has a recommended starting point when working with Multi window/burn rate alerting (this table assumes 30 day period with 99.9% success):
+|Severity|Long Window|Short Window|Burn Rate|Error Budget Consumed|
+|--------|-----------|------------|---------|---------------------|
+|page    |1 hour     | 5 min      | 14.4    |    2%               |
+|page    |6 hours    | 30 min     | 6       |    5%               |
+|Ticket  |3 days     | 6 hours    | 1       |    10%              |
+
+- pros
+    - this is one of the more flexible options when it comes to creating alert rules: it can easily be configured to track data over short and long periods of time
+    - high precision 
+    - high recall
+- cons
+    - this is an incredibly complex way of handling alerts, which ultimately can make it hard to manage/configure the alerts.
+
+## Tips & Tricks
+- Make use of recording rules
+    - this makes adjustments to your rules easier over time, since you have a single location (your recording rule) that you can change and your alerts will be adjusted accordingly
+    - recording rules are also more efficient for handling complex calculations
+- Don't reinvent the wheel
+    - Google already did the hard work figuring out what works and what does not work for a large scale enterpise operation: start with what they have done, and then adjust their work to fit your needs
+- Make use of resources that handle the toil for you
+    - Make use of tools like PromTools that can generate many of these alerting and recording rules for you, and any others you find in your time as an SRE
