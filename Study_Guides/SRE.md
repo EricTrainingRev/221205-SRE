@@ -299,3 +299,77 @@ In order for a Postmortem to be most effective it must be a collaborative effort
 
 Lastly, it is good practice to have senior memebers of the teams involved with the incident review the Postmortem to confirm that the details it provides are relevant. A Postmortem that just says a problem occurs and was solved is not useful for preventing/managing such incidents in the future. A Postmortem that delves into the issue, debugging strategies that worked and didn't work, and how the issue was solved provides lasting value for all teams invovled, and even those that weren't, since they can still benefit from the experience the incident management team gained from the incident.
 
+## Burn Rate
+Once we have a defined SLO, we are able to determine what availability target we have for some period of time: Let's say, for example, we aim for 99% successful requests. This allows us to have a downtime of ~7.2 hours in a 30 day period (24 hours per day for 30 days is 720. 720 multiplied by 0.99 = 7.2). This is assuming that all requests are successful when the service is "up" and all requests are failures when the service is "down". If our service is "down" (think returning 500 status codes) for 14.4 minutes every day, then by the end of a 30 day period, we will have accumulated 7.2 hours of "downtime", which is the entire Error Budget.
+
+We say in this case that we have a "Burn Rate" of 1. At this rate, by the end of our SLO Duration (generally 30 days), we will have consumed 1 times our Error Budget. Or you could say we have 100% of our SLO Duration before we run out of our Error Budget with a Burn Rate of 1. If we instead had 28.8 minutes of downtime every day, we would have a burn rate of 2: this means that by the end of the 30 days we would have consumed twice our error budget. We will consume our entire error budget in 50% of our SLO Duration (again assuming 30 days).
+
+Higher burn rates indicate more severe outages. If we have some issue that is causing our Burn Rate to be 1, then it is an issue that we need to solve, but it isn't so major that we must wake someone up in the middle of the night. With higher burn rates, there comes a time where we might want to wake someone up to fix the issue, such as if the burn rate is indicating we will quickly use up the available error budget.
+
+For example, if our burn rate is 15, then we will run out of our Error Budget in 2 days. This rate of consumption is so severe, that we should interrupt someone to fix the issue as quickly as possible. We can define different severities based on our burn rates: with a burn rate of 1, the severity is low and so can likely just create a "ticket" that someone will address when they have the free time. A more severe category could have us send an email with the issue, and past that, perhaps we should start directly contacting engineers (like with a pager or text).
+
+## Alerting Strategies & Terminology
+see [Burn-Rates](../SRE/Burn-Rates.md) for more detailed information.
+
+### Terminology
+- Significant Event
+  - something that consumes a large portion of your error budget
+- Precision
+  - % of events alerted on that were significant
+- Recall
+  - % of significant events alerted on
+- Detection Time
+  - how quickly alerts trigger
+- Reset Time
+  - how quickly alerts reset
+
+### SLI indicates SLO is being missed in a short range Alerting
+- pros
+  - good detection time
+  - good recall
+- cons
+  - low precision
+  - potential for overwhelming numbers of alerts
+
+### SLI indicates SLO is being missed in a long range Alerting
+- pros
+  - decent detection time
+  - decent precision
+- cons
+  - poor reset times
+  - more costly to calculate metrics over longer periods of time
+
+### Adding Pending Periods to short/long range Alerting
+- pros
+  - good precision
+- cons
+  - poor recall
+  - poor detection time
+
+### short/long Burn Rate Alerting
+- pros
+  - good precision
+  - good detection time
+- cons
+  - low recall
+  - poor reset times with longer ranges being measured
+
+### Multiple Burn Rate Alerting
+- pros
+  - good precision
+  - good recall
+- cons
+  - long reset times
+
+### Multi Window Multi Burn Rate Alerting
+- pros
+  - high precision
+  - high recall
+  - good reset rate
+- cons
+  - very complex: can be difficult to set up correctly
+  - potential for poor detection, especially with intermittent issues
+
+### Alerting Notes
+- avoid alerting too much
+- if a severe alert is triggered then make sure whoever gets the alert also knows what is causing the alert to trigger

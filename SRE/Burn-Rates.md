@@ -149,6 +149,6 @@ Google recommends that your short range be 1/12th of the long range you use to c
     - this makes adjustments to your rules easier over time, since you have a single location (your recording rule) that you can change and your alerts will be adjusted accordingly
     - recording rules are also more efficient for handling complex calculations
 - Don't reinvent the wheel
-    - Google already did the hard work figuring out what works and what does not work for a large scale enterpise operation: start with what they have done, and then adjust their work to fit your needs
+    - Google already did the hard work figuring out what works and what does not work for a large scale enterprise operation: start with what they have done, and then adjust their work to fit your needs
 - Make use of resources that handle the toil for you
     - Make use of tools like PromTools that can generate many of these alerting and recording rules for you, and any others you find in your time as an SRE
