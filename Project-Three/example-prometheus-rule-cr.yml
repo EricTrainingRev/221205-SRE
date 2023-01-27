@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: planetarium-prometheus-rules
+  labels:
+    release: prometheus
+spec:
+  groups:
+  - name: AppDown
+    rules:
+    - alert: AppDown
+      expr: up{job="planetarium-app"} != 1
+      labels:
+        severity: critical
+      annotations:
+        summary: "App is down"
+        description: "Prometheus has detected the application is not running"
