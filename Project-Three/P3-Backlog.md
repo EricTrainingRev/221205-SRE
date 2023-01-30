@@ -22,3 +22,7 @@
 
 ## Helpful Links
 - [Prometheus Operator help](https://github.com/prometheus-operator/prometheus-operator/tree/main/Documentation)
+- [Trello Scrum Board](https://trello.com/b/dFzygb01/scrum-board)
+    - you will need to make free trello accounts to use this
+- [Github projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects)
+    - another way to keep track of your Scrum work
