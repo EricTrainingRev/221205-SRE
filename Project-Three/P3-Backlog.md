@@ -19,6 +19,8 @@
     - *researching taints and tolerations would be a good starting point for this epic*
 - Sensitive information needed for Planetarium and monitoring tools to work should be stored and referenced as secrets in the cluster
 - data saved by Prometheus and Loki should be stored outside of the cluster in a persistent volume
+- Jenkins should be deployed so a DevOps pipeline can be established and utilized
+- Kubernetes resources should be managed by Terraform configurations to allow for more robust Configuration as Code implementation
 
 ## Helpful Links
 - [Prometheus Operator help](https://github.com/prometheus-operator/prometheus-operator/tree/main/Documentation)

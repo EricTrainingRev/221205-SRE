@@ -11,13 +11,11 @@ This is a collection of various web resources that can enhance your understandin
     - [Promtail Documentation](https://grafana.com/docs/loki/latest/clients/promtail/) is also located here
 - [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
 
+## AWS
 - [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 - [AWS EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
     - this includes helpful guides and commands for working with AWS EKS
     - [Instructions for scaling the nodes in a cluster](https://eksctl.io/usage/managing-nodegroups/#scaling-a-single-nodegroup) NOTE: this requires you to have the aws cli and eksctl programs installed, along with proper IAM permissions
-- [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
-    - Includes a tutorial library with detailed examples for common Terraform deployments
-    - [This EKS tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks) includes the necessary base configurations to create a simple cluster (NOTE: EKS is not a free tier eligible resource) 
 
 ## Kubernetes
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
@@ -27,3 +25,10 @@ This is a collection of various web resources that can enhance your understandin
 - [Taints and Tolerations: a way to organize your pods](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 - [Secret Objects: benefits and limitations](https://kubernetes.io/docs/concepts/configuration/secret/)
 - [Managing Resources: tips, tricks, and best practices](https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/)
+
+## Terraform
+- [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
+    - Includes a tutorial library with detailed examples for common Terraform deployments
+    - [This EKS tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks) includes the necessary base configurations to create a simple cluster (NOTE: EKS is not a free tier eligible resource) 
+- [Mange K8s resources with Terraform](https://developer.hashicorp.com/terraform/tutorials/kubernetes/kubernetes-provider)
+    - you should manage the cluster itself and the cluster resources seperately
