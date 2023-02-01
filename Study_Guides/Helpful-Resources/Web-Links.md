@@ -10,8 +10,7 @@ This is a collection of various web resources that can enhance your understandin
 - [Loki Documentation](https://grafana.com/docs/loki/latest/)
     - [Promtail Documentation](https://grafana.com/docs/loki/latest/clients/promtail/) is also located here
 - [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
-- [Kubernetes Documentation](https://kubernetes.io/docs/home/)
-    - [This is a helpful link](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) to commonly used kubectl commands
+
 - [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 - [AWS EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
     - this includes helpful guides and commands for working with AWS EKS
@@ -19,3 +18,12 @@ This is a collection of various web resources that can enhance your understandin
 - [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
     - Includes a tutorial library with detailed examples for common Terraform deployments
     - [This EKS tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks) includes the necessary base configurations to create a simple cluster (NOTE: EKS is not a free tier eligible resource) 
+
+## Kubernetes
+- [Kubernetes Documentation](https://kubernetes.io/docs/home/)
+    - [This is a link](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) to commonly used kubectl commands
+- [Drain: a graceful way to remove pods from a node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
+    - particularly useful if you need to shut down a node for whatever reason
+- [Taints and Tolerations: a way to organize your pods](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+- [Secret Objects: benefits and limitations](https://kubernetes.io/docs/concepts/configuration/secret/)
+- [Managing Resources: tips, tricks, and best practices](https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/)
