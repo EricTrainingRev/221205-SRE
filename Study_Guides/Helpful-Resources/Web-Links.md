@@ -32,3 +32,6 @@ This is a collection of various web resources that can enhance your understandin
     - [This EKS tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks) includes the necessary base configurations to create a simple cluster (NOTE: EKS is not a free tier eligible resource) 
 - [Mange K8s resources with Terraform](https://developer.hashicorp.com/terraform/tutorials/kubernetes/kubernetes-provider)
     - you should manage the cluster itself and the cluster resources seperately
+
+## Unix
+- [Ryan's Tutorials](https://ryanstutorials.net/) is a collection of informative tutorials that includes walkthroughs of working in a linux environment and creating bash scripts
